@@ -1,0 +1,40 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.18'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'java'
+	id 'war'
+	id 'idea'
+}
+
+group = 'workshop'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+processResources {
+	from ('static') {
+		into 'static'
+	}
+}
+
+dependencies {
+	compileOnly 'org.projectlombok:lombok:1.18.32'
+	annotationProcessor 'org.projectlombok:lombok:1.18.32'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.18'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.7.18'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.8'
+	implementation 'org.postgresql:postgresql:42.7.3'
+	implementation 'software.amazon.jdbc:aws-advanced-jdbc-wrapper:2.3.6'
+}

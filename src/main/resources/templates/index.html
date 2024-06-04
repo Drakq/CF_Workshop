@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>All Employees</title>
+	<script th:inline="javascript">
+		function addRow(tableName) {
+			let employees = document.getElementById(tableName);
+			var length = employees.rows.length-1;
+			var newRow = employees.insertRow(-1);
+			
+			var newID = newRow.insertCell(0);
+			var newFirstName = newRow.insertCell(1);
+			var newLastName = newRow.insertCell(2);
+			var newEMailAddress = newRow.insertCell(3);
+			
+			newFirstName.appendChild(newInput(tableName, "firstName", length));
+			newLastName.appendChild(newInput(tableName, "lastName", length));
+			newEMailAddress.appendChild(newInput(tableName, "email", length));
+		}
+		
+		function newInput(tableName, name, length) {
+			var newInput = document.createElement("INPUT");
+			newInput.id = tableName + length + "." + name;
+			newInput.name = tableName + "[" + length + "]." + name;
+			newInput.type = "text";
+			newInput.required = true;
+			newInput.className = "form-control form-control-sm";
+			
+			return newInput;
+		}
+	</script>
+</head>
+
+<body th:object="${employeeWrapper}">
+
+<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+<div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+
+<div layout:fragment="context">
+	<h4 style="text-align:left">Employees</h4>
+	
+	<div style="margin-bottom:10px">
+		<button onclick="addRow('employees')" class="btn btn-primary">Add Row</button>
+	</div>
+	
+	<form method="post" class="was-validated">
+		<table class="table table-striped table-hover table-sm" id="employees">
+			<tr>
+				<th style="min-width:50px">ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>E-Mail Address</th>
+			</tr>
+			<tr th:each="element, stat : *{employees}">
+				<td>
+					<input type="text" class="form-control-sm form-control-plaintext" th:field="*{employees[__${stat.index}__].ID}" readonly required>
+				</td>
+				<td>
+					<input type="text" class="form-control-sm form-control" th:field="*{employees[__${stat.index}__].firstName}" required>
+				</td>
+				<td>
+					<input type="text" class="form-control-sm form-control" th:field="*{employees[__${stat.index}__].lastName}" required>
+				</td>
+				<td>
+					<input type="email" class="form-control-sm form-control" th:field="*{employees[__${stat.index}__].email}" required>
+				</td>
+			</tr>
+		</table>
+		<div style="text-align:center">
+			<button type="submit" class="btn btn-lg btn-outline-success">Save</button>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>

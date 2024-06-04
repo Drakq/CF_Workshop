@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="/images/favicon-white.png">
+	<script src="/css/jquery.slim.min.js"></script>
+	<script src="/css/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<title>Workshop</title>
+</head>
+<body>
+
+<div align="center">
+	<div layout:fragment="error" th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+	<div layout:fragment="success" th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+	<div layout:fragment="context"></div>
+</div>
+
+</body>
+</html>
