@@ -21,12 +21,8 @@ public class WebController {
 	
 	@PostMapping("/")
 	public String saveEmployees(Model model, RedirectAttributes redirectAttributes, @ModelAttribute EmployeeWrapper employeeWrapper) {
-		try {
-			employeeRepository.saveAll(employeeWrapper.getEmployees());
-			redirectAttributes.addFlashAttribute("success", "Successfully saved.");
-		} catch(Exception e) {
-			redirectAttributes.addFlashAttribute("error", "Error occurred.");
-		}
+		employeeRepository.saveAll(employeeWrapper.getEmployees());
+		redirectAttributes.addFlashAttribute("success", "Successfully saved.");
 		return "redirect:/";
 	}
 }
