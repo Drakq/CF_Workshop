@@ -1,0 +1,8 @@
+applications:
+- name: Workshop
+  path: build\libs\Workshop-0.0.1.war
+  buildpack: java_buildpack
+  memory: 2048M
+  env:
+    SPRING_PROFILES_ACTIVE: cloud
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: "{enabled: false}"
